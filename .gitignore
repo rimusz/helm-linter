@@ -1,0 +1,15 @@
+**/*.pyc
+**/*.tgz
+**/*.tgz.prov
+.chartmuseum.log
+.cover/
+.helm/
+.idea/
+.robot/
+.venv/
+bin/
+dist/
+releases/
+testbin/
+vendor/
+
