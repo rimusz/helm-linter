@@ -1,15 +1,8 @@
-PLUGIN_NAME := login
+PLUGIN_NAME := linter
 
 HAS_DEP := $(shell command -v dep;)
 HAS_PIP := $(shell command -v pip;)
 HAS_VENV := $(shell command -v virtualenv;)
-
-.PHONY: bootstrap
-bootstrap:
-ifndef HAS_DEP
-	@goc get -u github.com/golang/dep/cmd/dep
-endif
-	@dep ensure -v -vendor-only
 
 .PHONY: build
 build: build_linux build_mac build_windows

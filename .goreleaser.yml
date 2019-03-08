@@ -1,6 +1,6 @@
 builds:
-  - main: ./cmd/helmlogin
-    binary: ./bin/helmlogin
+  - main: ./cmd/helmlinter
+    binary: ./bin/helmlinter
     env:
       - CGO_ENABLED=0
     goos:
