@@ -1,55 +1,50 @@
 package main
 
 import (
-        "fmt"
-        "log"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"reflect"
+	"strings"
 
-        "gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v2"
 )
 
-var data = `
-a: Easy!
-b:
-  c: 2
-  d: [3, 4]
-`
-
-// Note: struct fields must be public in order for unmarshal to
-// correctly populate the data.
-type T struct {
-        A string
-        B struct {
-                RenamedC int   `yaml:"c"`
-                D        []int `yaml:",flow"`
-        }
+func main() {
+	filename := os.Args[1]
+	var config interface{}
+	source, err := ioutil.ReadFile(filename)
+	if err != nil {
+		panic(err)
+	}
+	err = yaml.Unmarshal(source, &config)
+	if err != nil {
+		panic(err)
+	}
+	result := checkpasswds(config)
+	for k, v := range result {
+		fmt.Println(k+":", v)
+	}
 }
 
-func main() {
-        t := T{}
-    
-        err := yaml.Unmarshal([]byte(data), &t)
-        if err != nil {
-                log.Fatalf("error: %v", err)
-        }
-        fmt.Printf("--- t:\n%v\n\n", t)
-    
-        d, err := yaml.Marshal(&t)
-        if err != nil {
-                log.Fatalf("error: %v", err)
-        }
-        fmt.Printf("--- t dump:\n%s\n\n", string(d))
-    
-        m := make(map[interface{}]interface{})
-    
-        err = yaml.Unmarshal([]byte(data), &m)
-        if err != nil {
-                log.Fatalf("error: %v", err)
-        }
-        fmt.Printf("--- m:\n%v\n\n", m)
-    
-        d, err = yaml.Marshal(&m)
-        if err != nil {
-                log.Fatalf("error: %v", err)
-        }
-        fmt.Printf("--- m dump:\n%s\n\n", string(d))
+func checkpasswds(in interface{}) map[string]string {
+	out := make(map[string]string)
+	inval := reflect.ValueOf(in)
+	switch inval.Kind() {
+	case reflect.Map:
+		for k, v := range in.(map[interface{}]interface{}) {
+			vval := reflect.ValueOf(v)
+			switch vval.Kind() {
+			case reflect.String:
+				if v.(string) != "" && strings.Contains(strings.ToLower(k.(string)), "password") {
+					out[k.(string)] = v.(string)
+				}
+			case reflect.Map:
+				for k1, v1 := range checkpasswds(v) {
+					out[k.(string)+"."+k1] = v1
+				}
+			}
+		}
+	}
+	return out
 }

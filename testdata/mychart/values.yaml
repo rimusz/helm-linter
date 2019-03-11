@@ -1,0 +1,49 @@
+# Default values for druid.
+
+# ------------------------------------------------------------------------------
+# Zookeeper:
+# ------------------------------------------------------------------------------
+
+# zkHosts: druid-zookeeper-headless:2181
+
+zookeeper:
+  enabled: true
+  ## Environmental variables to set in Zookeeper
+  ##
+  env:
+    ## The JVM heap size to allocate to Zookeeper
+    ZK_HEAP_SIZE: "512M"
+  ## Configure Zookeeper persistence
+  persistence:
+    enabled: true
+
+# ------------------------------------------------------------------------------
+# MySQL:
+# ------------------------------------------------------------------------------
+mysql:
+  enabled: true
+  #
+  mysqlRootPassword: druidroot
+  #
+  mysqlUser: druid
+  #
+  mysqlPassword: druid
+  #
+  mysqlDatabase: druid
+  configurationFiles:
+    mysql_collate.cnf: |-
+      [mysqld]
+      character-set-server=utf8
+      collation-server=utf8_unicode_ci
+  aaa:
+    bPassword: eafaefawf
+    cPassword: 
+      password: dfafasf
+
+myPassword:
+
+password: sadasdsad
+
+password1: ""
+
+
