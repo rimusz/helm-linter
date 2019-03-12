@@ -8,8 +8,10 @@ HAS_VENV := $(shell command -v virtualenv;)
 build: build_linux build_mac build_windows
 
 build_windows: export GOARCH=amd64
+build_windows: export GO111MODULE=on
+build_windows: export GOPROXY=https://gocenter.io
 build_windows:
-	@GOOS=windows goc build -v --ldflags="-w -X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
+	@GOOS=windows go build -v --ldflags="-w -X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
 		-o bin/windows/amd64/helmlinter cmd/helmlinter/main.go  # windows
 
 link_windows:
@@ -17,8 +19,10 @@ link_windows:
 
 build_linux: export GOARCH=amd64
 build_linux: export CGO_ENABLED=0
+build_linux: export GO111MODULE=on
+build_linx: export GOPROXY=https://gocenter.io
 build_linux:
-	@GOOS=linux goc build -v --ldflags="-w -X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
+	@GOOS=linux go build -v --ldflags="-w -X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
 		-o bin/linux/amd64/helmlinter cmd/helmlinter/main.go  # linux
 
 link_linux:
@@ -26,8 +30,10 @@ link_linux:
 
 build_mac: export GOARCH=amd64
 build_mac: export CGO_ENABLED=0
+build_mac: export GO111MODULE=on
+build_mac: export GOPROXY=https://gocenter.io
 build_mac:
-	@GOOS=darwin goc build -v --ldflags="-w -X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
+	@GOOS=darwin go build -v --ldflags="-w -X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
 		-o bin/darwin/amd64/helmlinter cmd/helmlinter/main.go # mac osx
 	@cp bin/darwin/amd64/helmlinter ./bin/helmlinter # For use w make install
 
