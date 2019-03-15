@@ -39,10 +39,10 @@ jobs:
 
             if [[ -z "${CIRCLE_TAG:-}" ]]; then
               echo "Building snapshot..."
-              ./build.sh
+              scripts/build.sh
             else
               echo "Building release $CIRCLE_TAG..."
-              ./build.sh --release
+              scripts/build.sh --release
             fi
 workflows:
   version: 2
