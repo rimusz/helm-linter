@@ -40,6 +40,10 @@ build_mac:
 link_mac:
 	@cp bin/darwin/amd64/helmlinter ./bin/helmlinter
 
+.PHONY: tag
+tag:
+	@scripts/tag.sh
+
 .PHONY: clean
 clean:
 	@git status --ignored --short | grep '^!! ' | sed 's/!! //' | xargs rm -rf
