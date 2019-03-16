@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-if [ -n "${HELM_LOGIN_PLUGIN_NO_INSTALL_HOOK}" ]; then
+if [ -n "${HELM_LINTER_PLUGIN_NO_INSTALL_HOOK}" ]; then
     echo "Development mode: not downloading versioned release."
     exit 0
 fi
