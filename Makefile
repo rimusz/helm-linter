@@ -1,9 +1,5 @@
 PLUGIN_NAME := linter
 
-HAS_DEP := $(shell command -v dep;)
-HAS_PIP := $(shell command -v pip;)
-HAS_VENV := $(shell command -v virtualenv;)
-
 .PHONY: build
 build: build_linux build_mac build_windows
 
@@ -50,7 +46,7 @@ clean:
 
 .PHONY: install
 install:
-	HELM_LOGIN_PLUGIN_NO_INSTALL_HOOK=1 helm plugin install $(shell pwd)
+	HELM_LINTER_PLUGIN_NO_INSTALL_HOOK=1 helm plugin install $(shell pwd)
 
 .PHONY: remove
 remove:
