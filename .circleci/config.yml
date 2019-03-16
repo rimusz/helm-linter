@@ -8,7 +8,6 @@ jobs:
       - run:
           name: lint
           command: |
-            shellcheck -x scripts/build.sh
             shellcheck -x scripts/tag.sh
             shellcheck -x scripts/install_plugin.sh
   build:
