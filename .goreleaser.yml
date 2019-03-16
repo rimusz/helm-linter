@@ -1,5 +1,5 @@
 builds:
-  - main: cmd/helmlinter
+  - main: cmd/helmlinter/main.go
     binary: helmlinter
     env:
       - CGO_ENABLED=0
