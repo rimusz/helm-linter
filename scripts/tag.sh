@@ -7,4 +7,4 @@ echo "Tagging helm-linter with v${tag} ..."
 git checkout master
 git pull
 git tag -a -m "Release v$tag" "v$tag" 
-git push origin "v$tag"
+git push origin refs/tags/v"$tag"
