@@ -14,36 +14,10 @@ jobs:
   build:
     docker:
       - image: golang:1.12.1-alpine3.9
-    working_directory: /go/src/github.com/rimusz/helm-linter/cmd
+    working_directory: /go/src/github.com/rimusz/helm-linter
     steps:
-      - run:
-          name: Install tools
-          command: |
-            apk add bash build-base ca-certificates curl git openssh
-            curl -SLO https://github.com/goreleaser/goreleaser/releases/download/v0.103.1/goreleaser_Linux_x86_64.tar.gz
-            mkdir -p /usr/local/goreleaser
-            tar -xzf goreleaser_Linux_x86_64.tar.gz -C /usr/local/goreleaser
-            ln -s /usr/local/goreleaser/goreleaser /usr/local/bin/goreleaser
-            rm -rf goreleaser_Linux_x86_64.tar.gz
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - checkout
-      - run:
-          name: gofmt
-          command: |
-            gofmt -w -s . && git diff --exit-code
-      - run:
-          name: Build
-          command: |
-            set -e
-            set -u
-
-            if [[ -z "${CIRCLE_TAG:-}" ]]; then
-              echo "Building snapshot..."
-              scripts/build.sh
-            else
-              echo "Building release $CIRCLE_TAG..."
-              scripts/build.sh --release
-            fi
+      - run: curl -sL https://raw.githubusercontent.com/goreleaser/get/master/get | VERSION=v0.103.1 bash
 workflows:
   version: 2
   untagged-build:
