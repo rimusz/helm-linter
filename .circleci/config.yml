@@ -13,7 +13,7 @@ jobs:
             shellcheck -x scripts/install_plugin.sh
   build:
     docker:
-      - image: golang:1.12.1-alpine3.9
+      - image: circleci/golang:1.12
     working_directory: /go/src/github.com/rimusz/helm-linter
     steps:
       - checkout
