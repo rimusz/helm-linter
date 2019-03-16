@@ -1,7 +1,6 @@
 **/*.pyc
 **/*.tgz
 **/*.tgz.prov
-.chartmuseum.log
 .cover/
 .helm/
 .idea/
