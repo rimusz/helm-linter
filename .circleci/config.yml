@@ -14,7 +14,7 @@ jobs:
   build:
     docker:
       - image: golang:1.12.1-alpine3.9
-    working_directory: /go/src/github.com/rimusz/helm-linter
+    working_directory: /go/src/github.com/rimusz/helm-linter/cmd
     steps:
       - run:
           name: Install tools

@@ -1,5 +1,5 @@
 builds:
-  - main: cmd/helmlinter/main.go
+  - main: ./cmd/helmlinter
     binary: helmlinter
     env:
       - CGO_ENABLED=0
@@ -13,7 +13,11 @@ builds:
       - amd64
 
 archive:
-  format: tar.gz
+  format_overrides:
+    - goos: windows
+      format: zip
   files:
     - LICENSE
     - plugin.yaml
+checksum:
+  name_template: 'checksums.txt'
