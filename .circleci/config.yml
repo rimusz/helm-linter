@@ -23,7 +23,6 @@ workflows:
   untagged-build:
     jobs:
       - lint
-      - build
   tagged-build:
     jobs:
       - build:
