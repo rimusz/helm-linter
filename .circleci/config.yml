@@ -10,7 +10,14 @@ jobs:
           command: |
             shellcheck -x scripts/tag.sh
             shellcheck -x scripts/install_plugin.sh
-  build:
+  untagged-build:
+    docker:
+      - image: circleci/golang:1.12
+    working_directory: /go/src/github.com/rimusz/helm-linter
+    steps:
+      - checkout
+      - run: make build_linux
+  tagged-build:
     docker:
       - image: circleci/golang:1.12
     working_directory: /go/src/github.com/rimusz/helm-linter
@@ -22,9 +29,10 @@ workflows:
   untagged-build:
     jobs:
       - lint
+      - untagged-build
   tagged-build:
     jobs:
-      - build:
+      - tagged-build:
           filters:
             tags:
               only: /^v.*/
