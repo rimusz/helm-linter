@@ -18,7 +18,7 @@ Installed plugin: linter
 Check charts for hard-coded passwords:
 
 ```
-helm linter testdata/mychart/
+$ helm linter testdata/mychart/
 Checking chart testdata/mychart/
 
 Found hard-coded password/s:
@@ -30,7 +30,7 @@ Found hard-coded password/s:
 ```
 
 ```
-helm linter testdata/postgresql/
+$ helm linter testdata/postgresql/
 Checking chart testdata/postgresql/
 
 Hard-coded password/s have not been found :-)
