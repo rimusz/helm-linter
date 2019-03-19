@@ -11,19 +11,39 @@ import (
 )
 
 func main() {
-	filename := os.Args[1]
-	var config interface{}
-	source, err := ioutil.ReadFile(filename)
-	if err != nil {
-		panic(err)
-	}
-	err = yaml.Unmarshal(source, &config)
-	if err != nil {
-		panic(err)
-	}
-	result := checkpasswds(config)
-	for k, v := range result {
-		fmt.Println(k+":", v)
+	if len(os.Args) > 1 {
+		chartname := os.Args[1]
+		if chartname != "" {
+			fmt.Println("Checking chart " + chartname)
+			chartname = chartname + "/values.yaml"
+			if _, err := os.Stat(chartname); os.IsNotExist(err) {
+				fmt.Println(chartname + " does not exist!")
+				os.Exit(1)
+			}
+			var config interface{}
+			source, err := ioutil.ReadFile(chartname)
+			if err != nil {
+				panic(err)
+			}
+			err = yaml.Unmarshal(source, &config)
+			if err != nil {
+				panic(err)
+			}
+			result := checkpasswds(config)
+			if len(result) > 1 {
+				fmt.Println("")
+				fmt.Println("Found some hard-coded password/s:")
+				for k, v := range result {
+					fmt.Println(" "+k+":", v)
+				}
+			} else {
+				fmt.Println("")
+				fmt.Println("Hard-coded password/s have not been found :-)")
+			}
+		}
+	} else {
+		fmt.Println("Chart name has to be provided!")
+		os.Exit(1)
 	}
 }
 

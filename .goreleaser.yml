@@ -19,5 +19,6 @@ archive:
   format: tar.gz
   files:
     - LICENSE
+    - plugin.yaml
 checksum:
   name_template: 'checksums.txt'
