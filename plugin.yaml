@@ -1,7 +1,7 @@
 name: "linter"
-version: "0.0.10"
+version: "0.1.0"
 usage: "Please see https://github.com/rimusz/helm-linter for usage"
-description: "Helm plugin to find set passwords in values.yaml"
+description: "Helm plugin to find hardcoded passwords in values.yaml"
 command: "$HELM_PLUGIN_DIR/bin/helmlinter"
 downloaders:
 - command: "bin/helmlinter"
