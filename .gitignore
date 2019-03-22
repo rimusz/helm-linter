@@ -11,4 +11,5 @@ dist/
 releases/
 testbin/
 vendor/
+go_cache/
 
