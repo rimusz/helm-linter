@@ -31,7 +31,7 @@ build_mac: export GOPROXY=https://gocenter.io
 build_mac:
 	@GOOS=darwin go build -v --ldflags="-w -X main.Version=$(VERSION) -X main.Revision=$(REVISION)" \
 		-o bin/darwin/amd64/helmlinter helmlinter/main.go # mac osx
-	@cp bin/darwin/amd64/helmlinter ./bin/helmlinter # For use w make install
+	@cp bin/darwin/amd64/helmlinter ./bin/helmlinter # For use with make install
 
 link_mac:
 	@cp bin/darwin/amd64/helmlinter ./bin/helmlinter
