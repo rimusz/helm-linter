@@ -40,13 +40,11 @@ func main() {
 			}
 			result := checkpasswds(config)
 			if len(result) > 1 {
-				// fmt.Println("")
 				fmt.Println("Found some hard-coded password/s:")
 				for k, v := range result {
 					fmt.Println(" "+k+":", v)
 				}
 			} else {
-				// fmt.Println("")
 				fmt.Println("Hard-coded password/s have not been found :-)")
 			}
 		}
